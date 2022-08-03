@@ -7699,8 +7699,7 @@ body {
   background: #12b0e9;
   font-size: 16px;
   line-height: 1.8;
-  font-weight: 400;
-  color: #999999; }
+  font-weight: 400; }
   body.menu-show {
     overflow: hidden;
     position: fixed;
