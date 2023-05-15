@@ -10600,7 +10600,6 @@ h5,
 .owl-carousel.home-slider .slider-item .slider-text .one-third .overlay-1 {
   position: absolute;
   left: -7%;
-  /* background: #fff; */
   width: 150px;
   height: 50%;
   opacity: 1;
@@ -10959,17 +10958,13 @@ h5,
   margin-left: 20px;
 }
 .btn.btn-primary:hover {
-  /* border: 1px solid #0490c3; */
   color: #0490c3;
 }
 .btn.btn-primary.btn-outline-primary {
-  /* border: 2px solid #0490c3 !important; */
-  background: transparent !important;
   color: #0490c3 !important;
 }
 .btn.btn-primary.btn-outline-primary:hover {
   border: 2px solid transparent !important;
-  /* background: #0490c3 !important; */
   color: #fff !important;
 }
 .btn.btn-secondary {
@@ -11010,12 +11005,6 @@ h5,
     opacity: 1;
   }
 }
-
-/* .btn.btn-white:hover {
-  border: 1px solid #000000;
-  background: #fff !important;
-  color: black;
-} */
 .btn.btn-white.btn-outline-white {
   border: 1px solid #fff;
   background: transparent;
@@ -12244,15 +12233,10 @@ textarea.form-control {
   border-top-right-radius: 30px;
   border-top-left-radius: 30px;
 }
-/* .btn-download {
-  margin-top: 30px;
-  margin-left: 30px;
-} */
 .btn-download {
   font-size: 14px;
   background: #24987e;
   border-radius: 30px;
-  /* border: 1px solid #fff !important; */
   color: #ffffff !important;
   margin-top: 50px;
   margin-left: 30px;
