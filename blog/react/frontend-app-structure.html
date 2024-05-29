@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimal Frontend App Structure for Create React App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        pre {
+            background: #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Optimal Frontend App Structure for Create React App</h1>
+        <p>An optimal structure for a Create React App project helps in organizing the code better, making it scalable and maintainable. Here is a suggested structure:</p>
+        <pre>
+my-app/
+├── public/
+│   ├── index.html
+│   └── favicon.ico
+├── src/
+│   ├── assets/
+│   │   ├── images/
+│   │   ├── fonts/
+│   │   └── styles/
+│   │       └── global.css
+│   ├── components/
+│   │   ├── App.js
+│   │   ├── Header.js
+│   │   ├── Footer.js
+│   │   └── common/
+│   │       └── Button.js
+│   ├── hooks/
+│   │   └── useAuth.js
+│   ├── pages/
+│   │   ├── Home.js
+│   │   ├── About.js
+│   │   └── Contact.js
+│   ├── services/
+│   │   └── api.js
+│   ├── store/
+│   │   ├── actions.js
+│   │   ├── reducers.js
+│   │   └── store.js
+│   ├── tests/
+│   │   ├── App.test.js
+│   │   └── setupTests.js
+│   ├── utils/
+│   │   └── helpers.js
+│   ├── index.js
+│   ├── App.css
+│   └── index.css
+├── .gitignore
+├── package.json
+└── README.md
+        </pre>
+    </div>
+</body>
+</html>
