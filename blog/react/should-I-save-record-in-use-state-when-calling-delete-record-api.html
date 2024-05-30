@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>React Records App</title>
+  <title>React Records App with Simulated API</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -42,33 +42,53 @@
   <script type="text/babel">
     const { useState, useEffect } = React;
 
+    // Simulated API
+    const mockRecords = [
+      { id: 1, name: 'Record 1' },
+      { id: 2, name: 'Record 2' },
+      { id: 3, name: 'Record 3' },
+    ];
+
+    const fetchRecords = () => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(mockRecords);
+        }, 1000);
+      });
+    };
+
+    const deleteRecord = (recordId) => {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          const recordExists = mockRecords.some(record => record.id === recordId);
+          if (recordExists) {
+            resolve();
+          } else {
+            reject(new Error('Record not found'));
+          }
+        }, 500);
+      });
+    };
+
     const RecordsComponent = () => {
       const [records, setRecords] = useState([]);
 
       useEffect(() => {
-        fetch('/api/records')
-          .then(response => response.json())
-          .then(data => setRecords(data));
+        fetchRecords().then(data => setRecords(data));
       }, []);
 
       const handleDelete = (recordId) => {
         // Optimistic UI update
         setRecords(prevRecords => prevRecords.filter(record => record.id !== recordId));
 
-        fetch(`/api/records/${recordId}`, { method: 'DELETE' })
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('Failed to delete the record');
-            }
-            // Optionally, refetch the records
-            // fetch('/api/records')
-            //   .then(response => response.json())
-            //   .then(data => setRecords(data));
+        deleteRecord(recordId)
+          .then(() => {
+            console.log(`Record with id ${recordId} deleted successfully.`);
           })
           .catch(error => {
             console.error('Error:', error);
             // Rollback the UI update if needed
-            // setRecords(prevRecords => [...prevRecords, deletedRecord]);
+            // setRecords(prevRecords => [...prevRecords, mockRecords.find(record => record.id === recordId)]);
           });
       };
 
