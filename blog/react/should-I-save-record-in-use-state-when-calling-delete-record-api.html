@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React Records App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    button {
+      background-color: #f44336;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #d32f2f;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    const RecordsComponent = () => {
+      const [records, setRecords] = useState([]);
+
+      useEffect(() => {
+        fetch('/api/records')
+          .then(response => response.json())
+          .then(data => setRecords(data));
+      }, []);
+
+      const handleDelete = (recordId) => {
+        // Optimistic UI update
+        setRecords(prevRecords => prevRecords.filter(record => record.id !== recordId));
+
+        fetch(`/api/records/${recordId}`, { method: 'DELETE' })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Failed to delete the record');
+            }
+            // Optionally, refetch the records
+            // fetch('/api/records')
+            //   .then(response => response.json())
+            //   .then(data => setRecords(data));
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            // Rollback the UI update if needed
+            // setRecords(prevRecords => [...prevRecords, deletedRecord]);
+          });
+      };
+
+      return (
+        <div>
+          <h1>Records</h1>
+          <ul>
+            {records.map(record => (
+              <li key={record.id}>
+                {record.name}
+                <button onClick={() => handleDelete(record.id)}>Delete</button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    };
+
+    ReactDOM.render(<RecordsComponent />, document.getElementById('root'));
+  </script>
+</body>
+</html>
