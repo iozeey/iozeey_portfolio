@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./../../css/blog.css">
+
+    <title>Fetching JSON from GitHub</title>
+   
+</head>
+<body>
+    <div class="container">
+        <h1>How to Fetch JSON from GitHub and Display it on Your Website</h1>
+        <p>In this blog post, we'll walk through the steps to host a JSON file on GitHub and then fetch and display it on your website using JavaScript. Below are the detailed steps:</p>
+
+        <h2>1. Host JSON File on GitHub</h2>
+        <p>First, create a GitHub repository and upload your JSON file.</p>
+        <ul>
+            <li>
+                <strong>Create a New Repository</strong> <br/>
+                <p>Go to GitHub, create a new repository, and make it public.</p>
+            </li>
+            <li>
+                <strong>Upload JSON File</strong>
+                <p>In your repository, click "Add file" and select "Upload files". Choose your JSON file and commit the changes.</p>
+            </li>
+            <li>
+                <strong>Get the Raw URL</strong>
+                <p>Navigate to the JSON file in your repository and click Raw to get the raw URL of the file.</p>
+            </li>
+        </ul>
+
+        <h2>2. Fetch and Display JSON on Your Website</h2>
+        <p>Use the following HTML and JavaScript to fetch the JSON file from GitHub and display it on your website:</p>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Fetch JSON from GitHub&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Data from JSON&lt;/h1&gt;
+    &lt;pre id="json-data"&gt;&lt;/pre&gt;
+
+    &lt;script&gt;
+        // Replace with your raw JSON URL from GitHub
+        const jsonUrl = 'https://raw.githubusercontent.com/yourusername/yourrepository/branch/yourfile.json';
+
+        fetch(jsonUrl)
+            .then(response =&gt; response.json())
+            .then(data =&gt; {
+                document.getElementById('json-data').textContent = JSON.stringify(data, null, 2);
+            })
+            .catch(error =&gt; console.error('Error fetching JSON:', error));
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+        <h2>Explanation</h2>
+        <p>Here's a brief explanation of the code:</p>
+        <ul>
+            <li>
+                <strong>HTML Structure:</strong>
+                The basic structure includes a heading and a <code>&lt;pre&gt;</code> element to display the JSON data.
+            </li>
+            <li>
+                <strong>JavaScript:</strong>
+                The <code>fetch</code> API is used to retrieve the JSON file from the GitHub URL. The JSON data is then displayed inside the <code>&lt;pre&gt;</code> element.
+            </li>
+        </ul>
+        
+        <h2>Demo</h2>
+        <div id="json-data"></div>
+    </div>
+    <script>
+        // Replace with your raw JSON URL from GitHub
+        const jsonUrl = 'https://raw.githubusercontent.com/iozeey/iozeey_portfolio/main/blog/jsondb/test.json';
+
+        fetch(jsonUrl)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('json-data').textContent = JSON.stringify(data, null, 2);
+            })
+            .catch(error => console.error('Error fetching JSON:', error));
+    </script>
+</body>
+</html>
