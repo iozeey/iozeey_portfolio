@@ -2,30 +2,33 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="./../../css/blog.css">
-  <title>Delete Record Tutorial</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./../../css/blog.css">
+    <title>Delete Record Tutorial</title>
 </head>
 
 <body>
-  <div class="container">
-    <h1>Delete Record API Interaction</h1>
-    <p>When designing React components that interact with APIs, such as a "delete record" API, it’s important to
-      consider how state management affects the performance and behavior of your application.</p>
-    <h2>Considerations</h2>
-    <ul>
-      <li><strong>Unnecessary Re-renders:</strong> Storing a record pending deletion in a local state using useState can
-        trigger unnecessary re-renders.</li>
-      <li><strong>State Synchronization:</strong> If deletion fails, the local state would then be out of sync with the
-        backend, leading to potential inconsistencies.</li>
-      <li><strong>Simplifying State Management:</strong> Not storing the record in state simplifies component’s state
-        management.</li>
-      <li><strong>Optimistic Updates:</strong> Immediately remove the item from the UI assuming the API call will
-        succeed and handle failures accordingly.</li>
-    </ul>
-    <h2>Example Code</h2>
-    <pre>
+    <div class="container">
+        <h1>Delete Record API Interaction</h1>
+        <p>When designing React components that interact with APIs, such as a "delete record" API, it’s important to
+            consider how state management affects the performance and behavior of your application.</p>
+        <h2>Considerations</h2>
+        <ul>
+            <li><strong>Unnecessary Re-renders:</strong> Storing a record pending deletion in a local state using
+                useState can
+                trigger unnecessary re-renders.</li>
+            <li><strong>State Synchronization:</strong> If deletion fails, the local state would then be out of sync
+                with the
+                backend, leading to potential inconsistencies.</li>
+            <li><strong>Simplifying State Management:</strong> Not storing the record in state simplifies component’s
+                state
+                management.</li>
+            <li><strong>Optimistic Updates:</strong> Immediately remove the item from the UI assuming the API call will
+                succeed and handle failures accordingly.</li>
+        </ul>
+        <h2>Example Code</h2>
+        <pre>
 function deleteRecord(id) {
     // Optimistically remove the record from UI
     updateRecords((currentRecords) => currentRecords.filter(record => record.id !== id));
@@ -47,14 +50,14 @@ function rollbackChanges(id) {
     // Rollback UI changes if necessary
 }
     </pre>
-    <h2>Static Demo</h2>
-    <ul id="recordList">
-      <li>Record 1 <button onclick="deleteRecord(1)">Delete</button></li>
-      <li>Record 2 <button onclick="deleteRecord(2)">Delete</button></li>
-      <li>Record 3 <button onclick="deleteRecord(3)">Delete</button></li>
-    </ul>
-    <h2>React Code </h1>
-      <pre>
+        <h2>Static Demo</h2>
+        <ul id="recordList">
+            <li>Record 1 <button onclick="deleteRecord(1)">Delete</button></li>
+            <li>Record 2 <button onclick="deleteRecord(2)">Delete</button></li>
+            <li>Record 3 <button onclick="deleteRecord(3)">Delete</button></li>
+        </ul>
+        <h2>React Code </h1>
+            <pre>
 &lt;script src=&quot;https://unpkg.com/react@17/umd/react.development.js&quot; crossorigin&gt;&lt;/script&gt;
 &lt;script src=&quot;https://unpkg.com/react-dom@17/umd/react-dom.development.js&quot; crossorigin&gt;&lt;/script&gt;
 &lt;script src=&quot;https://unpkg.com/babel-standalone@6/babel.min.js&quot;&gt;&lt;/script&gt;
@@ -111,60 +114,60 @@ function rollbackChanges(id) {
 </pre>
 
 
-<div id="root">Loading...</div>
-<script src="https://unpkg.com/react@17/umd/react.development.js"></script>
-<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
-<script src="https://unpkg.com/babel-standalone"></script>
-<script type="text/babel">
-function App() {
-    const initialRecords = [
-        { id: 1, name: 'Record 1' },
-        { id: 2, name: 'Record 2' },
-        { id: 3, name: 'Record 3' }
-    ];
-    const [records, setRecords] = React.useState(initialRecords);
+            <div id="root">Loading...</div>
+            <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+            <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+            <script src="https://unpkg.com/babel-standalone"></script>
+            <script type="text/babel">
+                function App() {
+                    const initialRecords = [
+                        { id: 1, name: 'Record 1' },
+                        { id: 2, name: 'Record 2' },
+                        { id: 3, name: 'Record 3' }
+                    ];
+                    const [records, setRecords] = React.useState(initialRecords);
 
-    const deleteRecord = (id) => {
-        const newRecords = records.filter(record => record.id !== id);
-        setRecords(newRecords);
+                    const deleteRecord = (id) => {
+                        const newRecords = records.filter(record => record.id !== id);
+                        setRecords(newRecords);
 
-        simulateDeleteAPI(id).then(response => {
-            console.log('Delete successful:', response);
-        }).catch(error => {
-            console.error('Delete failed, re-inserting:', error);
-            setRecords(currentRecords => [...currentRecords, initialRecords.find(record => record.id === id)]);
-        });
-    };
+                        simulateDeleteAPI(id).then(response => {
+                            console.log('Delete successful:', response);
+                        }).catch(error => {
+                            console.error('Delete failed, re-inserting:', error);
+                            setRecords(currentRecords => [...currentRecords, initialRecords.find(record => record.id === id)]);
+                        });
+                    };
 
-    const simulateDeleteAPI = (id) => {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                if (id === 2) {
-                    reject('Failed to delete due to server error.');
-                } else {
-                    resolve('Deleted successfully.');
+                    const simulateDeleteAPI = (id) => {
+                        return new Promise((resolve, reject) => {
+                            setTimeout(() => {
+                                if (id === 2) {
+                                    reject('Failed to delete due to server error.');
+                                } else {
+                                    resolve('Deleted successfully.');
+                                }
+                            }, 1000);
+                        });
+                    };
+
+                    return (
+                        <div className="container">
+                            <h1>Optimistic Approach: Delete Record API Interaction</h1>
+                            <ul>
+                                {records.map(record => (
+                                    <li key={record.id}>
+                                        {record.name} <button onClick={() => deleteRecord(record.id)}>Delete</button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    );
                 }
-            }, 1000);
-        });
-    };
 
-    return (
-        <div className="container">
-            <h1>Optimistic Approach: Delete Record API Interaction</h1>
-            <ul>
-                {records.map(record => (
-                    <li key={record.id}>
-                        {record.name} <button onClick={() => deleteRecord(record.id)}>Delete</button>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
-}
-
-ReactDOM.render(<App />, document.getElementById('root'));
-</script>
-  </div>
+                ReactDOM.render(<App />, document.getElementById('root'));
+            </script>
+    </div>
 </body>
 
 </html>
