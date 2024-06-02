@@ -20,18 +20,16 @@ h1 {
 }
 
 ul {
-  list-style-type: none;
+  list-style-type: disc;
   padding: 0;
+  margin-left: 20px;
 }
 
 li {
   margin: 10px 0;
   padding: 10px;
-  border: 1px solid #ccc;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
+
 
 button {
   background-color: #f44336;
