@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A step-by-step guide to configuring the Nginx root directory on Mac.">
+    <title>Configuring Nginx Root Directory on Mac</title>
+    <link rel="stylesheet" href="./../../theme/blog-template.css">
+</head>
+<body>
+    <button class="toggle-button" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    <div class="container">
+        <h1>Configuring Nginx Root Directory on Mac</h1>
+        <h2>Problem</h2>
+        <p>Configuring the root directory for Nginx on a Mac can be challenging for new users. This post will guide you through the process, ensuring you can set up your Nginx server correctly.</p>
+        
+        <h2>Solution</h2>
+        <h3>Prerequisites</h3>
+        <p>Before starting, ensure you have Nginx installed on your Mac. You can install it using Homebrew with the following command:</p>
+        <pre><code>brew install nginx</code></pre>
+        
+        <h3>Step-by-Step Guide</h3>
+        <ol>
+            <li><strong>Locate the Nginx Configuration File</strong></li>
+            <p>The primary Nginx configuration file is located at <code>/usr/local/etc/nginx/nginx.conf</code>. Open this file in your preferred text editor. For example, using <code>nano</code>:</p>
+            <pre><code>sudo nano /usr/local/etc/nginx/nginx.conf</code></pre>
+            
+            <li><strong>Edit the Configuration File</strong></li>
+            <p>In the <code>nginx.conf</code> file, find the <code>server</code> block, which typically looks like this:</p>
+            <pre><code>server {
+    listen       80;
+    server_name  localhost;
+
+    location / {
+        root   html;
+        index  index.html index.htm;
+    }
+
+    # other settings
+}</code></pre>
+            
+            <li><strong>Set the Root Directory</strong></li>
+            <p>Modify the <code>root</code> directive to point to your desired directory. For example, if you want to serve files from <code>/Users/your-username/Sites</code>, change the <code>root</code> line as follows:</p>
+            <pre><code>root /Users/your-username/Sites;</code></pre>
+            
+            <li><strong>Save and Close the Configuration File</strong></li>
+            <p>After making the changes, save the file and exit your text editor. For <code>nano</code>, you can do this by pressing <code>CTRL + X</code>, then <code>Y</code> to confirm, and <code>Enter</code> to save.</p>
+            
+            <li><strong>Test the Configuration</strong></li>
+            <p>Before restarting Nginx, test the configuration to ensure there are no syntax errors:</p>
+            <pre><code>sudo nginx -t</code></pre>
+            
+            <li><strong>Restart Nginx</strong></li>
+            <p>Finally, restart Nginx to apply the changes:</p>
+            <pre><code>sudo nginx -s reload</code></pre>
+            
+            <li><strong>Verify the Setup</strong></li>
+            <p>Open your web browser and navigate to <code>http://localhost</code>. You should see the contents of the new root directory you specified.</p>
+        </ol>
+        
+        <div class="conclusion">
+            <h2>Conclusion</h2>
+            <p>By following these steps, you have successfully configured the root directory for Nginx on your Mac. This setup allows you to serve web content from your preferred directory, making web development and testing more efficient. Always ensure to backup your configuration files before making significant changes to avoid potential issues.</p>
+        </div>
+    </div>
+    <script src="./../../theme/blog-template.js"></script>
+</body>
+</html>
