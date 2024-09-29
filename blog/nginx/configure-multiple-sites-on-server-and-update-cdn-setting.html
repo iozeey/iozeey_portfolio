@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to configure multiple sites on an Nginx server and set up DNS in Cloudflare.">
+    <title>How to Configure Multiple Sites on Nginx Server</title>
+    <link rel="stylesheet" href="./../../theme/blog-template.css">
+</head>
+<body>
+    <button class="toggle-button" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    <div class="container">
+        <h1>How to Configure Multiple Sites on an Nginx Server</h1>
+        <h2>Problem</h2>
+        <p>Configuring multiple websites on a single Nginx server requires proper configuration to ensure each domain is routed to the correct web root. This post explains how to set up two example sites using Nginx and also how to update DNS settings when using Cloudflare as a CDN.</p>
+        
+        <h2>Solution</h2>
+        <h3>1. Edit the nginx.conf File</h3>
+        <pre>
+user www-data;
+worker_processes auto;
+pid /run/nginx.pid;
+include /etc/nginx/modules-enabled/*.conf;
+
+events {
+    worker_connections 768;
+}
+
+http {
+    sendfile on;
+    tcp_nopush on;
+    tcp_nodelay on;
+    keepalive_timeout 65;
+    types_hash_max_size 2048;
+
+    # Include configurations for available sites
+    include /etc/nginx/conf.d/*.conf;
+    include /etc/nginx/sites-enabled/*;
+}
+        </pre>
+        <p>This file includes references to <code>sites-enabled</code>, where individual site configurations will be included.</p>
+
+        <h3>2. Create Virtual Host Configuration for Each Site</h3>
+        <p>In <code>/etc/nginx/sites-available</code>, create a configuration file for each website.</p>
+
+        <h4>site1.dev Configuration</h4>
+        <pre>
+server {
+    listen 80;
+    server_name site1.dev www.site1.dev;
+
+    root /var/www/site1;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
+        </pre>
+
+        <h4>site2.dev Configuration</h4>
+        <pre>
+server {
+    listen 80;
+    server_name site2.dev www.site2.dev;
+
+    root /var/www/site2;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
+        </pre>
+
+        <h3>3. Enable the Sites</h3>
+        <p>Create symbolic links in <code>sites-enabled</code> to enable each site:</p>
+        <pre>
+sudo ln -s /etc/nginx/sites-available/site1.dev /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/site2.dev /etc/nginx/sites-enabled/
+        </pre>
+
+        <h3>4. Test and Restart Nginx</h3>
+        <p>Test your Nginx configuration and restart the service:</p>
+        <pre>
+sudo nginx -t
+sudo systemctl restart nginx
+        </pre>
+
+        <h2>Updating DNS Settings in Cloudflare</h2>
+        <p>If you are using a CDN like Cloudflare, you must update your DNS records to point to the server's IP. Here is an example of a DNS A record configuration in Cloudflare:</p>
+        <p>To ensure proper routing through Cloudflare:</p>
+        <ul>
+            <li>Set the record type to <code>A</code>.</li>
+            <li>Input the correct domain (e.g., <code>www</code>).</li>
+            <li>Enter the server's IPv4 address where the website is hosted.</li>
+            <li>Ensure the proxy status is enabled (orange cloud icon).</li>
+        </ul>
+        <p>These changes ensure that traffic to your domain is correctly routed through Cloudflare’s CDN, optimizing performance and providing security features like SSL.</p>
+
+        <div class="conclusion">
+            <h2>Conclusion</h2>
+            <p>Nginx allows you to host multiple websites by separating their configurations in <code>sites-available</code> and linking them to <code>sites-enabled</code>. Additionally, updating DNS settings in Cloudflare ensures your site is properly routed through the CDN for better performance and security.</p>
+        </div>
+    
+    </div>
+    <script src="./../../theme/blog-template.js"></script>
+</body>
+</html>
