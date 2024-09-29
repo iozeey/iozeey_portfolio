@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to set up Docker for Rails development on a Mac.">
+    <title>Using Docker in Mac for Rails Development</title>
+    <link rel="stylesheet" href="./../../theme/blog-template.css">
+</head>
+<body>
+    <button class="toggle-button" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    <div class="container">
+        <h1>Using Docker in Mac for Rails Development</h1>
+
+        <h2>Problem</h2>
+        <p>Setting up a development environment for Rails on a Mac can be challenging due to dependency management and compatibility issues. Docker offers a solution by providing a consistent environment across different machines.</p>
+
+        <h2>Solution</h2>
+        <p>To use Docker for Rails development on a Mac, follow these steps:</p>
+
+        <h3>1. Install Docker</h3>
+        <p>First, you need to install Docker Desktop for Mac. You can download it from the <a href="https://www.docker.com/products/docker-desktop" target="_blank">official Docker website</a>.</p>
+
+        <h3>2. Create a Dockerfile</h3>
+        <p>Create a <code>Dockerfile</code> in the root of your Rails project. This file will define the environment for your Rails application.</p>
+        <pre>
+# Use the official Ruby image as the base image
+FROM ruby:3.0.1
+
+# Install dependencies
+RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+
+# Set the working directory
+WORKDIR /myapp
+
+# Copy the Gemfile and Gemfile.lock into the image
+COPY Gemfile /myapp/Gemfile
+COPY Gemfile.lock /myapp/Gemfile.lock
+
+# Install the Rails dependencies
+RUN bundle install
+
+# Copy the rest of the application code into the image
+COPY . /myapp
+
+# Precompile assets
+RUN bundle exec rake assets:precompile
+
+# Expose port 3000 to the Docker host
+EXPOSE 3000
+
+# Specify the command to run when the container starts
+CMD ["rails", "server", "-b", "0.0.0.0"]
+        </pre>
+
+        <h3>3. Create a docker-compose.yml File</h3>
+        <p>To manage multiple services, such as a PostgreSQL database, create a <code>docker-compose.yml</code> file:</p>
+        <pre>
+version: '3'
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: password
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0'"
+    volumes:
+      - ".:/myapp"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+        </pre>
+
+        <h3>4. Build and Run Your Containers</h3>
+        <p>Run the following command to build and start your Docker containers:</p>
+        <pre>
+docker-compose up --build
+        </pre>
+        <p>This command will download the necessary images, build your Docker containers, and start the services defined in your <code>docker-compose.yml</code> file.</p>
+    
+        <div class="conclusion">
+        <h2>Conclusion</h2>
+        <p>Using Docker for Rails development on a Mac simplifies the setup process and ensures a consistent environment. By following these steps, you can quickly set up a Dockerized Rails application, making development more efficient and less prone to environment-specific issues.</p>
+      </div>
+
+    </div>
+    <script src="blog-template.js"></script>
+</body>
+</html>

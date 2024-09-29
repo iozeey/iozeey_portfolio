@@ -144,3 +144,8 @@ iframe {
   height: 100%;
   border: none;
 }
+
+.compact-list ul, li{
+  margin: 0;
+  padding: 0;
+}
