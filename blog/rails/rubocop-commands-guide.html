@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Detailed explanation of commonly used RuboCop commands for maintaining Ruby and Rails code quality.">
+    <title>Commonly Used RuboCop Commands</title>
+    <link rel="stylesheet" href="./../../theme/blog-template.css">
+</head>
+<body>
+    <button class="toggle-button" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    <div class="container">
+        <h1>Commonly Used RuboCop Commands</h1>
+
+        <h2>1. <code>bin/rubocop</code></h2>
+        <p>Runs RuboCop on the entire project and checks for code style violations without making changes.</p>
+        <p><strong>Use:</strong> To identify issues in your code before making any changes.</p>
+
+        <h2>2. <code>bin/rubocop -f</code></h2>
+        <p>Runs RuboCop and specifies the output format.</p>
+        <ul>
+            <li><code>simple</code>: A concise summary of offenses.</li>
+            <li><code>offenses</code>: Detailed output of offenses (default).</li>
+            <li><code>json</code>: Useful for tool integrations.</li>
+        </ul>
+        <p><strong>Example:</strong></p>
+        <pre>bin/rubocop -f simple</pre>
+
+        <h2>3. <code>bin/rubocop -a</code></h2>
+        <p>Automatically fixes issues in the code wherever possible.</p>
+        <p><strong>Note:</strong> Not all issues can be auto-corrected.</p>
+
+        <h2>4. <code>bin/rubocop -a --only Style/StringLiterals</code></h2>
+        <p>Runs auto-correction for a specific cop or rule.</p>
+        <p><strong>Example:</strong></p>
+        <pre>bin/rubocop -a --only Style/StringLiterals</pre>
+
+        <h2>5. <code>bin/rubocop -f simple</code></h2>
+        <p>Outputs a simplified report summarizing the offenses.</p>
+        <p><strong>Use:</strong> For a quick overview of violations.</p>
+
+        <h2>6. <code>bin/rubocop --auto-gen-config</code></h2>
+        <p>Generates a <code>.rubocop_todo.yml</code> file to suppress current offenses.</p>
+        <p><strong>Use:</strong> To start RuboCop on a legacy codebase and prioritize future compliance.</p>
+        <p><strong>Example Flow:</strong></p>
+        <pre>
+bin/rubocop --auto-gen-config
+# Update .rubocop.yml
+inherit_from:
+  - .rubocop_todo.yml
+        </pre>
+
+        <h2>Additional Commands</h2>
+        <h3><code>bin/rubocop --only &lt;cop_name&gt;</code></h3>
+        <p>Checks for offenses related to a specific cop.</p>
+        <p><strong>Example:</strong></p>
+        <pre>bin/rubocop --only Metrics/MethodLength</pre>
+
+        <h3><code>bin/rubocop --fail-level &lt;severity&gt;</code></h3>
+        <p>Sets the failure threshold based on severity.</p>
+        <p><strong>Example:</strong></p>
+        <pre>bin/rubocop --fail-level error</pre>
+
+        <h3><code>bin/rubocop --display-cop-names</code></h3>
+        <p>Displays the names of cops that detect issues.</p>
+
+        <h3><code>bin/rubocop --out &lt;file&gt;</code></h3>
+        <p>Outputs the results to a file.</p>
+        <p><strong>Example:</strong></p>
+        <pre>bin/rubocop --format json --out rubocop.json</pre>
+
+        <h3><code>bin/rubocop --rails</code></h3>
+        <p>Enables Rails-specific cops for checking conventions and best practices.</p>
+
+        <div class="conclusion">
+            <h2>Conclusion</h2>
+            <p>Using these RuboCop commands, you can efficiently maintain code quality in Ruby and Rails projects. 
+            Combine these with your CI workflow to automate style and quality checks.</p>
+        </div>
+    </div>
+    <script src="./../../theme/blog-template.js" ></script>
+</body>
+</html>
