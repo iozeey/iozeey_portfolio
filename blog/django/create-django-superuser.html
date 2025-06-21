@@ -1,0 +1,90 @@
+To create a Django admin user via the command line, follow these steps:
+
+1. Activate Virtual Environment (If Using One)
+
+If your Django project is inside a virtual environment, activate it:
+
+For macOS/Linux:
+
+source venv/bin/activate
+
+For Windows (Command Prompt):
+
+venv\Scripts\activate
+
+2. Navigate to Your Django Project
+
+Move to the project directory where manage.py is located:
+
+cd /path/to/your/django/project
+
+3. Run Django Migrations (If Not Done)
+
+Ensure the database and authentication tables exist:
+
+python manage.py migrate
+
+4. Create the Superuser
+
+Run the following command:
+
+python manage.py createsuperuser
+
+It will prompt you to enter:
+	•	Username (e.g., admin)
+	•	Email (optional)
+	•	Password (you’ll enter twice)
+
+If successful, you will see:
+
+Superuser created successfully.
+
+5. Run the Django Server
+
+Start the Django development server:
+
+python manage.py runserver
+
+Then, open your browser and go to:
+
+http://127.0.0.1:8000/admin/
+
+Log in with the admin credentials you just created.
+
+6. Alternative: Create Superuser Without Prompt
+
+If you want to create a superuser without interactive input, run:
+
+python manage.py shell
+
+Then enter:
+
+from django.contrib.auth.models import User
+User.objects.create_superuser('admin', 'admin@example.com', 'password123')
+
+(Replace 'admin', 'admin@example.com', and 'password123' with your values.)
+
+7. If Superuser Creation Fails
+
+Issue: “django.db.utils.OperationalError: no such table: auth_user”
+
+Fix:
+
+python manage.py migrate
+
+Issue: “Superuser already exists”
+
+You can delete the existing superuser:
+
+python manage.py shell
+
+Then:
+
+from django.contrib.auth.models import User
+User.objects.filter(username='admin').delete()
+
+Then try creating the superuser again.
+
+Your Django admin user is now created! 🎉
+
+Let me know if you run into issues! 🚀
