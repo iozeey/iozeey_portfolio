@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./../../theme/blog-template.css">
+  <title>React Records App with Dummy API</title>
+</head>
+
+<body>
+  <button class="toggle-button" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+
+  <div class="container">
+    <h2>Building a React App with a Dummy API</h2>
+    <div id="blog-post">
+      <p>
+        In this tutorial, we will build a simple React app that manages a list of records.
+        We will also simulate an API to handle fetching and deleting records.
+      </p>
+      <p>
+        Below, you can see the implementation of the React app along with the dummy API simulation.
+      </p>
+    </div>
+    <h2>React Code</h2>
+    <pre>
+&lt;script src=&quot;https://unpkg.com/react@17/umd/react.development.js&quot; crossorigin&gt;&lt;/script&gt;
+&lt;script src=&quot;https://unpkg.com/react-dom@17/umd/react-dom.development.js&quot; crossorigin&gt;&lt;/script&gt;
+&lt;script src=&quot;https://unpkg.com/babel-standalone@6/babel.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;script type=&quot;text/babel&quot;&gt;
+  const { useState, useEffect } = React;
+
+  // Dummy API simulation
+  const dummyRecords = [
+    { id: 1, name: 'Record 1' },
+    { id: 2, name: 'Record 2' },
+    { id: 3, name: 'Record 3' },
+  ];
+
+  const fetchRecords = () => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(dummyRecords);
+      }, 500); // Simulate API delay
+    });
+  };
+
+  const deleteRecord = (recordId) => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const index = dummyRecords.findIndex(record =&gt; record.id === recordId);
+        if (index !== -1) {
+          dummyRecords.splice(index, 1);
+          resolve({ success: true });
+        } else {
+          reject({ success: false });
+        }
+      }, 500); // Simulate API delay
+    });
+  };
+
+  // React component
+  const RecordsComponent = () => {
+    const [records, setRecords] = useState([]);
+
+    useEffect(() => {
+      fetchRecords()
+        .then(data =&gt; setRecords(data));
+    }, []);
+
+    const handleDelete = (recordId) =&gt; {
+      setRecords(prevRecords =&gt; prevRecords.filter(record =&gt; record.id !== recordId));
+
+      deleteRecord(recordId)
+        .then(response =&gt; {
+          if (!response.success) {
+            throw new Error('Failed to delete the record');
+          }
+        })
+        .catch(error =&gt; {
+          console.error('Error:', error);
+        });
+    };
+
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;Demo Records&lt;/h1&gt;
+        &lt;ul&gt;
+          {records.map(record =&gt; (
+            &lt;li key={record.id}&gt;
+              {record.name}
+              &lt;button onClick={() =&gt; handleDelete(record.id)}&gt;Delete&lt;/button&gt;
+            &lt;/li&gt;
+          ))}
+        &lt;/ul&gt;
+      &lt;/div&gt;
+    );
+  };
+
+  ReactDOM.render(&lt;RecordsComponent /&gt;, document.getElementById('root'));
+&lt;/script&gt;
+    </pre>
+    <div id="root"></div>
+  </div>
+  <script src="./../../theme/blog-template.js"></script>
+  
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    // Dummy API simulation
+    const dummyRecords = [
+      { id: 1, name: 'Record 1' },
+      { id: 2, name: 'Record 2' },
+      { id: 3, name: 'Record 3' },
+    ];
+
+    const fetchRecords = () => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(dummyRecords);
+        }, 500); // Simulate API delay
+      });
+    };
+
+    const deleteRecord = (recordId) => {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          const index = dummyRecords.findIndex(record => record.id === recordId);
+          if (index !== -1) {
+            dummyRecords.splice(index, 1);
+            resolve({ success: true });
+          } else {
+            reject({ success: false });
+          }
+        }, 500); // Simulate API delay
+      });
+    };
+
+    // React component
+    const RecordsComponent = () => {
+      const [records, setRecords] = useState([]);
+
+      useEffect(() => {
+        fetchRecords()
+          .then(data => setRecords(data));
+      }, []);
+
+      const handleDelete = (recordId) => {
+        setRecords(prevRecords => prevRecords.filter(record => record.id !== recordId));
+
+        deleteRecord(recordId)
+          .then(response => {
+            if (!response.success) {
+              throw new Error('Failed to delete the record');
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+      };
+
+      return (
+        <div>
+          <h2>Demo Records</h2>
+          <ul>
+            {records.map(record => (
+              <li key={record.id}>
+                {record.name}
+                <button onClick={() => handleDelete(record.id)}>Delete</button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    };
+
+    ReactDOM.render(<RecordsComponent />, document.getElementById('root'));
+  </script>
+</body>
+
+</html>

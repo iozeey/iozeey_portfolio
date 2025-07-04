@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn about TypeScript function signatures, with examples and explanations of syntax features like optional parameters, default values, and more.">
+    <title>TypeScript Function Signatures Explained</title>
+    <link rel="stylesheet" href="./../../theme/blog-template.css">
+</head>
+<body>
+    <button class="toggle-button" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    <div class="container">
+        <h1>TypeScript Function Signature Syntax with Explanation</h1>
+        <h2>Basic Function Signature</h2>
+        <p>In TypeScript, function signatures describe the parameters and return type of a function. Here's a simple example:</p>
+        <pre><code>function greet(name: string): string {
+    return `Hello, ${name}!`;
+}</code></pre>
+        <h2>Optional Parameters</h2>
+        <p>TypeScript allows you to mark certain parameters as optional by adding a <code>?</code> after the parameter name:</p>
+        <pre><code>function greet(name: string, title?: string): string {
+    if (title) {
+        return `Hello, ${title} ${name}`;
+    }
+    return `Hello, ${name}`;
+}</code></pre>
+        <h2>Default Parameters</h2>
+        <p>You can assign default values to parameters:</p>
+        <pre><code>function greet(name: string, greeting: string = "Hello"): string {
+    return `${greeting}, ${name}`;
+}</code></pre>
+        <h2>Rest Parameters</h2>
+        <p>Rest parameters allow a function to accept an indefinite number of arguments as an array:</p>
+        <pre><code>function joinNames(...names: string[]): string {
+    return names.join(", ");
+}</code></pre>
+        <h2>Function Signature with Object Types</h2>
+        <p>You can also define functions that accept complex types, such as objects:</p>
+        <pre><code>interface User {
+    name: string;
+    age: number;
+}
+
+function greetUser(user: User): string {
+    return `Hello, ${user.name}. You are ${user.age} years old.`;
+}</code></pre>
+        <h2>Return Types: Void, Never, and More</h2>
+        <p>A function that doesn't return anything has a return type of <code>void</code>:</p>
+        <pre><code>function logMessage(message: string): void {
+    console.log(message);
+}</code></pre>
+        <p>A function that never returns (usually because it throws an error or goes into an infinite loop) has a return type of <code>never</code>:</p>
+        <pre><code>function throwError(message: string): never {
+    throw new Error(message);
+}</code></pre>
+        <h2>Arrow Function Syntax</h2>
+        <p>TypeScript supports arrow functions, which are a more concise way of writing functions:</p>
+        <pre><code>const add = (x: number, y: number): number => x + y;</code></pre>
+        <h2>Function Overloading</h2>
+        <p>TypeScript also supports function overloading, allowing multiple function signatures with different parameter types. The function body must handle the variations:</p>
+        <pre><code>function call(phoneNumber: string): void;
+function call(phoneNumber: number): void;
+function call(phoneNumber: any): void {
+    console.log(`Calling ${phoneNumber}`);
+}</code></pre>
+        <h2>Generic Functions</h2>
+        <p>Generics allow functions to work with a variety of types, specified when the function is called:</p>
+        <pre><code>function identity<T>(arg: T): T {
+    return arg;
+}
+
+const num = identity<number>(42); // num is of type number
+const str = identity<string>("Hello"); // str is of type string</code></pre>
+        
+        <div class="conclusion">
+            <h2>Conclusion</h2>
+            <p>TypeScript function signatures are a powerful way to enforce type safety and flexibility in your code. With various features like optional parameters, default values, rest parameters, and generics, you can create robust and flexible functions for a wide range of use cases.</p>
+        </div>
+    </div>
+    <script src="./../../theme/blog-template.js" ></script>
+</body>
+</html>

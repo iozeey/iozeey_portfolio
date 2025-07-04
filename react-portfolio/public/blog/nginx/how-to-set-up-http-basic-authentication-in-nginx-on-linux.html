@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to set up HTTP Basic Authentication in Nginx to secure your web applications.">
+    <title>How to Set Up HTTP Basic Authentication in Nginx</title>
+    <link rel="stylesheet" href="./../../theme/blog-template.css">
+</head>
+<body>
+    <button class="toggle-button" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    <div class="container">
+        <h1>How to Set Up HTTP Basic Authentication in Nginx</h1>
+        <h2>Problem</h2>
+        <p>HTTP Basic Authentication is a simple authentication mechanism built into the HTTP protocol. It requires users to provide a username and password to access certain resources. This guide will walk you through setting up HTTP Basic Authentication in Nginx to secure your web applications.</p>
+        
+        <h2>Solution</h2>
+        <ol>
+            <li>
+                <h3>Step 1: Install the Apache Utils Package</h3>
+                <pre><code class="language-bash">sudo apt-get update
+sudo apt-get install apache2-utils</code></pre>
+                <pre><code class="language-bash">sudo yum install httpd-tools</code></pre>
+            </li>
+            <li>
+                <h3>Step 2: Create a Password File</h3>
+                <pre><code class="language-bash">sudo htpasswd -c /etc/nginx/.htpasswd username
+sudo htpasswd /etc/nginx/.htpasswd additionaluser</code></pre>
+            </li>
+            <li>
+                <h3>Step 3: Configure Nginx to Use the Password File</h3>
+                <pre><code class="language-nginx">server {
+    listen 80;
+    server_name your_domain.com;
+
+    location / {
+        auth_basic "Restricted Area";
+        auth_basic_user_file /etc/nginx/.htpasswd;
+        
+        proxy_pass http://your_backend_server;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}</code></pre>
+            </li>
+            <li>
+                <h3>Step 4: Test the Configuration</h3>
+                <pre><code class="language-bash">sudo nginx -t
+sudo systemctl reload nginx</code></pre>
+            </li>
+        </ol>
+        
+        <div class="conclusion">
+            <h2>Conclusion</h2>
+            <p>HTTP Basic Authentication provides a straightforward way to protect web resources by requiring a username and password. By following these steps, you can easily set up HTTP Basic Authentication in Nginx to enhance the security of your web applications.</p>
+        </div>
+    </div>
+    <script src="./../../theme/blog-template.js"></script>
+</body>
+</html>
