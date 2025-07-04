@@ -2,7 +2,7 @@ import React from 'react';
 
 const AboutSection: React.FC = () => {
   return (
-    <section className="ftco-about ftco-section ftco-no-pt ftco-no-pb" id="about-section">
+    <section className="ftco-about ftco-section ftco-no-pt ftco-no-pb my-4" id="about-section">
       <div className="container">
         <div className="row d-flex no-gutters">
           <div className="col-xs-6">
