@@ -1,44 +1,68 @@
-import React from 'react';
+
+import React, { useEffect, useRef } from 'react';
+import styles from './CounterSection.module.css';
+
+const counters = [
+  {
+    icon: 'flaticon-suitcase',
+    number: 70,
+    label: 'Project Complete',
+  },
+  {
+    icon: 'flaticon-loyalty',
+    number: 35,
+    label: 'Happy Clients',
+  },
+  {
+    icon: 'flaticon-calendar',
+    number: 9,
+    label: 'Years Experienced',
+  },
+];
 
 const CounterSection: React.FC = () => {
+  const numberRefs = useRef<(HTMLSpanElement | null)[]>([]);
+
+  useEffect(() => {
+    numberRefs.current.forEach((el, idx) => {
+      if (!el) return;
+      const target = counters[idx].number;
+      // let start = 0;
+      const duration = 1200;
+      const step = Math.ceil(target / (duration / 16));
+      let current = 0;
+      const animate = () => {
+        current += step;
+        if (current >= target) {
+          el.textContent = target.toString();
+        } else {
+          el.textContent = current.toString();
+          requestAnimationFrame(animate);
+        }
+      };
+      animate();
+    });
+  }, []);
+
   return (
-    <section className="ftco-counter img bg-light" id="section-counter">
-      <div className="container">
-        <div className="row d-flex justify-content-center">
-          <div className="col-md-3 justify-content-center counter-wrap ftco-animate">
-            <div className="block-18 d-flex">
-              <div className="icon d-flex justify-content-center align-items-center">
-                <span className="flaticon-suitcase"></span>
-              </div>
-              <div className="text">
-                <strong className="number" data-number="70">0</strong>
-                <span>Project Complete</span>
-              </div>
+    <section className={styles.counterSection} id="section-counter">
+      <div className={styles.counterGrid}>
+        {counters.map((counter, idx) => (
+          <div className={styles.counterCard} key={counter.label}>
+            <div className={styles.counterIcon}>
+              <span className={counter.icon}></span>
             </div>
+            <span
+              className={styles.counterNumber}
+              ref={el => {
+                numberRefs.current[idx] = el;
+              }}
+            >
+              0
+            </span>
+            <div className={styles.counterLabel}>{counter.label}</div>
           </div>
-          <div className="col-md-3 justify-content-center counter-wrap ftco-animate">
-            <div className="block-18 d-flex">
-              <div className="icon d-flex justify-content-center align-items-center">
-                <span className="flaticon-loyalty"></span>
-              </div>
-              <div className="text">
-                <strong className="number" data-number="35">0</strong>
-                <span>Happy Clients</span>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-3 justify-content-center counter-wrap ftco-animate">
-            <div className="block-18 d-flex">
-              <div className="icon d-flex justify-content-center align-items-center">
-                <span className="flaticon-calendar"></span>
-              </div>
-              <div className="text">
-                <strong className="number" data-number="9">0</strong>
-                <span>Years experienced</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
     </section>
   );
