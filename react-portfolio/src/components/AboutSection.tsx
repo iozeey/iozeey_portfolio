@@ -9,10 +9,10 @@ const AboutSection: React.FC = () => {
   ];
 
   const interests = [
-    { icon: '🎵', label: 'Music' },
-    { icon: '✈️', label: 'Travel' },
-    { icon: '🎬', label: 'Movies' },
-    { icon: '⚽', label: 'Sports' },
+    { icon: '🤖', label: 'Machine Learning' },
+    { icon: '🧠', label: 'Artificial Intelligence' },
+    { icon: '⚙️', label: 'DevOps' },
+    { icon: '🌐', label: 'Networking' },
   ];
 
   return (
