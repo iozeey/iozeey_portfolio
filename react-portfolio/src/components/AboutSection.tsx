@@ -1,84 +1,75 @@
 import React from 'react';
 
 const AboutSection: React.FC = () => {
-  return (
-    <section className="ftco-about ftco-section ftco-no-pt ftco-no-pb my-4" id="about-section">
-      <div className="container">
-        <div className="row d-flex no-gutters">
-          <div className="col-xs-6">
-            <div className="py-md-2">
-              <div className="row justify-content-start pb-3">
-                <div className="col-md-12 heading-section ftco-animate bg-white rounded">
-                  <h2 className="mb-4 text-center" style={{fontSize: '34px', textTransform: 'capitalize'}}>About Me</h2>
-                  <p className="text-center"><b className="text-capitalize">"Change is life." that is why i always say welcome to change.</b></p>
-                  <p>
-                    Passionate, determined, hard-working, self-motivated and restless are the words that describe me best.
-                    I am software engineer and developer and have 8 years of experience in Web and desktop based applications.
-                  </p>
-                  <p>
-                    Technical Skills:<br />
-                    ✔ Python Django, Ruby on Rails, Core PHP and Laravel framework<br />
-                    ✔ ReactJs, GraphQL, Apollo Client, AngularJs, Vue.js ,Handlebars.js ,HTML5 and Canvas API,CSS3, Twitter BootStrap.
-                  </p>
-                  <p>
-                    Basic level skills:<br />
-                    ✔ React Native<br />
-                    ✔ Java Dropwizard, Maven<br />
-                    ✔ Android (Very basic level)<br />
-                  </p>
+  const personalInfo = [
+    { label: 'Name', value: 'Zeeshan Ahmad' },
+    { label: 'Email', value: 'asif.zshan@gmail.com' },
+    { label: 'Phone', value: '+44 7774 261608' },
+    { label: 'Location', value: 'Hertfordshire, UK' },
+  ];
 
-                  <ul className="about-info mt-4 px-md-0 px-2">
-                    <li className="d-flex"><span>Name:</span> <span>Zeeshan Ahmad</span></li>
-                    <li className="d-flex"><span>Email:</span> <span>asif.zshan@gmail.com</span></li>
-                    <li className="d-flex"><span>Phone: </span> <span>+44 7774 261608</span></li>
-                  </ul>
-                </div>
-                <div className="col-md-12 bg-white rounded mt-4 p-4">
-                  <div className="my-interest d-lg-flex w-100">
-                    <div className="interest-wrap d-flex align-items-center">
-                      <div className="icon d-flex align-items-center justify-content-center">
-                        <span className="flaticon-listening"></span>
-                      </div>
-                      <div className="text">Music</div>
-                    </div>
-                    <div className="interest-wrap d-flex align-items-center">
-                      <div className="icon d-flex align-items-center justify-content-center">
-                        <span className="flaticon-suitcases"></span>
-                      </div>
-                      <div className="text">Travel</div>
-                    </div>
-                    <div className="interest-wrap d-flex align-items-center">
-                      <div className="icon d-flex align-items-center justify-content-center">
-                        <span className="flaticon-video-player"></span>
-                      </div>
-                      <div className="text">Movie</div>
-                    </div>
-                    <div className="interest-wrap d-flex align-items-center">
-                      <div className="icon d-flex align-items-center justify-content-center">
-                        <span className="flaticon-football"></span>
-                      </div>
-                      <div className="text">Sports</div>
-                    </div>
+  const interests = [
+    { icon: '🎵', label: 'Music' },
+    { icon: '✈️', label: 'Travel' },
+    { icon: '🎬', label: 'Movies' },
+    { icon: '⚽', label: 'Sports' },
+  ];
+
+  return (
+    <section id="about" className="about-section section">
+      <div className="container">
+        <div className="section-header">
+          <h2 className="section-title">About Me</h2>
+          <p className="section-subtitle">
+            "Change is life." - That's why I always welcome change and growth.
+          </p>
+        </div>
+
+        <div className="about-content">
+          <div className="about-text animate-slideInLeft">
+            <p>
+              Passionate, determined, and self-motivated software engineer with 8 years of experience 
+              in web and desktop applications. I thrive on creating innovative solutions and staying 
+              ahead of technology trends.
+            </p>
+            
+            <h3>Technical Expertise:</h3>
+            <div className="tech-skills">
+              <div className="skill-category">
+                <h4>Backend Development</h4>
+                <p>Python Django, Ruby on Rails, Core PHP, Laravel, Node.js</p>
+              </div>
+              <div className="skill-category">
+                <h4>Frontend Development</h4>
+                <p>React.js, GraphQL, Apollo Client, Angular.js, Vue.js, HTML5, CSS3, Bootstrap</p>
+              </div>
+              <div className="skill-category">
+                <h4>Emerging Technologies</h4>
+                <p>React Native, Java Dropwizard, Maven, Android Development</p>
+              </div>
+            </div>
+
+            <div className="personal-info">
+              <h3>Contact Information</h3>
+              <div className="info-grid">
+                {personalInfo.map((info, index) => (
+                  <div key={index} className="info-item">
+                    <span className="info-label">{info.label}:</span>
+                    <span className="info-value">{info.value}</span>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '2rem' }}>
-                    <a
-                      href="mailto:asif.zshan@gmail.com"
-                      className="btn btn-primary"
-                      style={{ minWidth: 120, fontWeight: 500, borderRadius: 8, boxShadow: '0 2px 8px rgba(18,176,233,0.08)' }}
-                    >
-                      Hire me
-                    </a>
-                    <a
-                      href="/images/Zeeshan_Ahmad_Full_Stack_Web_Dev.pdf"
-                      target="_blank"
-                      download="ZeeshanAhmad[iozeey.com].pdf"
-                      className="btn btn-primary btn-outline-primary"
-                      style={{ minWidth: 140, fontWeight: 500, borderRadius: 8, boxShadow: '0 2px 8px rgba(18,176,233,0.08)' }}
-                    >
-                      Download CV
-                    </a>
+                ))}
+              </div>
+            </div>
+
+            <div className="interests">
+              <h3>Interests</h3>
+              <div className="interests-grid">
+                {interests.map((interest, index) => (
+                  <div key={index} className="interest-item">
+                    <span className="interest-icon">{interest.icon}</span>
+                    <span className="interest-label">{interest.label}</span>
                   </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>

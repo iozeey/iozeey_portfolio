@@ -34,13 +34,13 @@ const BlogIndex: React.FC = () => {
   };
 
   return (
-    <div className="blog-container">
-      <button className="toggle-button" onClick={toggleDarkMode}>
+    <div>
+      <button onClick={toggleDarkMode}>
         Toggle Dark Mode
       </button>
-      <div className="container">
+      <div>
         <h1>Blog</h1>
-        <ul className="compact-list">
+        <ul>
           {blogLinks.map((link, index) => (
             <li key={index}>
               <a href={link.href}>{link.title}</a>

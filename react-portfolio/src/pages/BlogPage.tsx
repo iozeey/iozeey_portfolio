@@ -4,7 +4,7 @@ import BlogIndex from '../components/BlogIndex';
 
 const BlogPage: React.FC = () => {
   return (
-    <div className="blog-container">
+    <div>
       <Routes>
         <Route path="/" element={<BlogIndex />} />
         <Route path="/*" element={<div>Blog post not found</div>} />

@@ -1,68 +1,101 @@
-
-import React, { useEffect, useRef } from 'react';
-import styles from './CounterSection.module.css';
+import React, { useEffect, useRef, useState } from 'react';
 
 const counters = [
   {
-    icon: 'flaticon-suitcase',
+    icon: '💼',
     number: 70,
-    label: 'Project Complete',
+    label: 'Projects Complete',
+    suffix: '+'
   },
   {
-    icon: 'flaticon-loyalty',
+    icon: '😊',
     number: 35,
     label: 'Happy Clients',
+    suffix: '+'
   },
   {
-    icon: 'flaticon-calendar',
-    number: 9,
-    label: 'Years Experienced',
+    icon: '🎯',
+    number: 8,
+    label: 'Years Experience',
+    suffix: '+'
+  },
+  {
+    icon: '⏰',
+    number: 24,
+    label: 'Support Available',
+    suffix: '/7'
   },
 ];
 
 const CounterSection: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
   const numberRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
   useEffect(() => {
-    numberRefs.current.forEach((el, idx) => {
-      if (!el) return;
-      const target = counters[idx].number;
-      // let start = 0;
-      const duration = 1200;
-      const step = Math.ceil(target / (duration / 16));
-      let current = 0;
-      const animate = () => {
-        current += step;
-        if (current >= target) {
-          el.textContent = target.toString();
-        } else {
-          el.textContent = current.toString();
-          requestAnimationFrame(animate);
+    const startCountAnimation = () => {
+      numberRefs.current.forEach((el, idx) => {
+        if (!el) return;
+        const target = counters[idx].number;
+        const duration = 2000;
+        const steps = 60;
+        const stepValue = target / steps;
+        let current = 0;
+        
+        const timer = setInterval(() => {
+          current += stepValue;
+          if (current >= target) {
+            el.textContent = target.toString();
+            clearInterval(timer);
+          } else {
+            el.textContent = Math.floor(current).toString();
+          }
+        }, duration / steps);
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isVisible) {
+          setIsVisible(true);
+          startCountAnimation();
         }
-      };
-      animate();
-    });
-  }, []);
+      },
+      { threshold: 0.5 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [isVisible]);
 
   return (
-    <section className={styles.counterSection} id="section-counter">
-      <div className={styles.counterGrid}>
-        {counters.map((counter, idx) => (
-          <div className={styles.counterCard} key={counter.label}>
-            <div className={styles.counterIcon}>
-              <span className={counter.icon}></span>
+    <section ref={sectionRef} className="counter-section section">
+      <div className="container">
+        <div className="counter-grid">
+          {counters.map((counter, idx) => (
+            <div key={counter.label} className="counter-item animate-fadeInUp">
+              <div className="counter-icon">
+                {counter.icon}
+              </div>
+              <div className="counter-content">
+                <span className="counter-number">
+                  <span
+                    ref={el => {
+                      numberRefs.current[idx] = el;
+                    }}
+                  >
+                    0
+                  </span>
+                  {counter.suffix}
+                </span>
+                <span className="counter-label">{counter.label}</span>
+              </div>
             </div>
-            <span
-              className={styles.counterNumber}
-              ref={el => {
-                numberRefs.current[idx] = el;
-              }}
-            >
-              0
-            </span>
-            <div className={styles.counterLabel}>{counter.label}</div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

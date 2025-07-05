@@ -1,31 +1,61 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Navbar: React.FC = () => {
-  return (
-    <nav className="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light site-navbar-target" id="ftco-navbar">
-      <div className="container-fluid">
-        <a className="navbar-brand" href="/">Iozeey<span>.</span></a>
-        <button 
-          className="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" 
-          type="button" 
-          data-toggle="collapse"
-          data-target="#ftco-nav" 
-          aria-controls="ftco-nav" 
-          aria-expanded="false" 
-          aria-label="Toggle navigation"
-        >
-          <span className="oi oi-menu"></span> Menu
-        </button>
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-        <div className="collapse navbar-collapse" id="ftco-nav">
-          <ul className="navbar-nav nav ml-auto">
-            <li className="nav-item"><a href="#home-section" className="nav-link"><span>Home</span></a></li>
-            <li className="nav-item"><a href="#about-section" className="nav-link"><span>About</span></a></li>
-            <li className="nav-item"><a href="#skills-section" className="nav-link"><span>Skills</span></a></li>
-            <li className="nav-item"><a href="#services-section" className="nav-link"><span>Services</span></a></li>
-            <li className="nav-item"><a href="#projects-section" className="nav-link"><span>Projects</span></a></li>
-            <li className="nav-item"><a href="/blog" className="nav-link"><span>Blog</span></a></li>
-          </ul>
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navItems = [
+    { label: 'Home', href: '#home' },
+    { label: 'About', href: '#about' },
+    { label: 'Skills', href: '#skills' },
+    { label: 'Services', href: '#services' },
+    { label: 'Projects', href: '#projects' },
+    { label: 'Blog', href: '/blog' },
+  ];
+
+  return (
+    <nav className={`navbar ${isScrolled ? 'navbar-scrolled' : ''}`}>
+      <div className="container">
+        <div className="navbar-content">
+          <a href="/" className="navbar-brand">
+            <span className="brand-text">Iozeey</span>
+            <span className="brand-dot">.</span>
+          </a>
+
+          <div className={`navbar-menu ${isMobileMenuOpen ? 'navbar-menu-open' : ''}`}>
+            <ul className="navbar-nav">
+              {navItems.map((item, index) => (
+                <li key={index} className="navbar-item">
+                  <a 
+                    href={item.href} 
+                    className="navbar-link"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <button 
+            className="navbar-toggle"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle navigation"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         </div>
       </div>
     </nav>

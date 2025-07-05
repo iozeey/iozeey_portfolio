@@ -1,48 +1,81 @@
 import React from 'react';
 
 const SkillsSection: React.FC = () => {
-  const skills = [
-    'ReactJs',
-    'RubyOnRails', 
-    'Python',
-    'NodeJs',
-    'SEO'
+  const skillCategories = [
+    {
+      title: 'Frontend Development',
+      icon: '⚛️',
+      skills: ['React.js', 'Vue.js', 'Angular', 'TypeScript', 'HTML5/CSS3'],
+      level: 90
+    },
+    {
+      title: 'Backend Development',
+      icon: '🔧',
+      skills: ['Python Django', 'Ruby on Rails', 'Node.js', 'PHP Laravel'],
+      level: 85
+    },
+    {
+      title: 'Database & Cloud',
+      icon: '💾',
+      skills: ['PostgreSQL', 'MongoDB', 'AWS', 'Docker', 'Redis'],
+      level: 80
+    },
+    {
+      title: 'AI/ML & Data Science',
+      icon: '🤖',
+      skills: ['Python', 'TensorFlow', 'PyTorch', 'Scikit-learn', 'Data Analysis'],
+      level: 75
+    },
+    {
+      title: 'Mobile Development',
+      icon: '📱',
+      skills: ['React Native', 'PWA', 'Mobile UI/UX', 'App Store Deployment'],
+      level: 70
+    },
+    {
+      title: 'DevOps & Tools',
+      icon: '⚙️',
+      skills: ['Git', 'CI/CD', 'Linux', 'Nginx', 'Testing'],
+      level: 85
+    }
   ];
 
-  const skillLevels = ['Novice', 'Beginner', 'Intermediate', 'Advanced', 'Expert'];
-
   return (
-    <section className="ftco-section bg-white" id="skills-section">
-      <div className="position-absolute scroll-down"></div>
-
+    <section id="skills" className="skills-section section">
       <div className="container">
-        <div className="row justify-content-center pb-5">
-          <div className="col-md-12 heading-section text-center ftco-animate">
-            <h2 className="mb-4">My Skills</h2>
-            <p>Learn & keep growing is my motive for better service</p>
-          </div>
+        <div className="section-header">
+          <h2 className="section-title">My Skills</h2>
+          <p className="section-subtitle">
+            Continuously learning and growing to provide the best service possible
+          </p>
         </div>
 
-        <section className="d-flex bg-lightwhite" id="skills">
-          <div className="d-flex justify-content-center align-items-center flex-grow-1">
-            <div className="position-relative chart-wrapper">
-              <ul className="chart-skills p-0">
-                {skills.map((skill, index) => (
-                  <li key={index} className="position-relative">
-                    <span>{skill}</span>
-                  </li>
+        <div className="skills-grid grid grid-3">
+          {skillCategories.map((category, index) => (
+            <div key={index} className="skill-item card animate-fadeInUp">
+              <div className="skill-icon">
+                {category.icon}
+              </div>
+              <h3 className="skill-title">{category.title}</h3>
+              <div className="skill-progress">
+                <div className="progress-bar">
+                  <div 
+                    className="progress-fill" 
+                    style={{ width: `${category.level}%` }}
+                  ></div>
+                </div>
+                <span className="progress-text">{category.level}%</span>
+              </div>
+              <div className="skill-tags">
+                {category.skills.map((skill, skillIndex) => (
+                  <span key={skillIndex} className="skill-tag">
+                    {skill}
+                  </span>
                 ))}
-              </ul>
-              <ul className="d-flex position-absolute chart-levels">
-                {skillLevels.map((level, index) => (
-                  <li key={index} className="flex-grow-1 position-relative">
-                    <span className="position-absolute">{level}</span>
-                  </li>
-                ))}
-              </ul>
+              </div>
             </div>
-          </div>
-        </section>
+          ))}
+        </div>
       </div>
     </section>
   );
