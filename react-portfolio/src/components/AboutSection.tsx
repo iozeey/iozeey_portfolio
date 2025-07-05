@@ -60,6 +60,24 @@ const AboutSection: React.FC = () => {
                       <div className="text">Sports</div>
                     </div>
                   </div>
+                  <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '2rem' }}>
+                    <a
+                      href="mailto:asif.zshan@gmail.com"
+                      className="btn btn-primary"
+                      style={{ minWidth: 120, fontWeight: 500, borderRadius: 8, boxShadow: '0 2px 8px rgba(18,176,233,0.08)' }}
+                    >
+                      Hire me
+                    </a>
+                    <a
+                      href="/images/Zeeshan_Ahmad_Full_Stack_Web_Dev.pdf"
+                      target="_blank"
+                      download="ZeeshanAhmad[iozeey.com].pdf"
+                      className="btn btn-primary btn-outline-primary"
+                      style={{ minWidth: 140, fontWeight: 500, borderRadius: 8, boxShadow: '0 2px 8px rgba(18,176,233,0.08)' }}
+                    >
+                      Download CV
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

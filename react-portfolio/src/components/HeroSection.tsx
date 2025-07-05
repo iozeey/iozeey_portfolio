@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './HeroSection.module.css';
 
 const HeroSection: React.FC = () => {
   return (
@@ -13,12 +14,11 @@ const HeroSection: React.FC = () => {
                 <div className="overlay-1"></div>
               </div>
               <div className="one-forth d-flex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-                <div className="text">
-                  <h1 className="mb-4 mt-3">Hi, I am <span>Zeeshan Ahmad</span>. A Full Stack <span>Web</span> Developer.</h1>
-                  <p>
-                    <a href="mailto:asif.zshan@gmail.com" className="btn btn-primary">Hire me</a>
-                    <a href="/images/Zeeshan_Ahmad_Full_Stack_Web_Dev.pdf" target="_blank" download="ZeeshanAhmad[iozeey.com].pdf" className="btn btn-primary btn-outline-primary">Download CV</a>
-                  </p>
+                <div className="text text-center">
+                  <h1 className={styles.heroText}>
+                    Hi, I am <span>Zeeshan Ahmad</span>.<br />
+                    A Full Stack <span>Web</span> Developer.
+                  </h1>
                 </div>
               </div>
             </div>
@@ -34,13 +34,13 @@ const HeroSection: React.FC = () => {
                 <div className="overlay-1"></div>
               </div>
               <div className="one-forth d-flex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-                <div className="text">
-                  <h1 className="mb-4 mt-3">Future <span>AI/ML</span> Engineer</h1>
-                  <span className="subheading">Doing MSc Artificial Intelligence and Robotics from Hertfordshire University, UK</span>
-                  <p>
-                    <a href="mailto:asif.zshan@gmail.com" className="btn btn-primary">Hire me</a>
-                    <a href="/images/Zeeshan_Ahmad_Full_Stack_Web_Dev.pdf" target="_blank" download="ZeeshanAhmad[iozeey.com].pdf" className="btn btn-primary btn-outline-primary">Download CV</a>
-                  </p>
+                <div className="text text-center">
+                  <h1 className={styles.heroText}>
+                    Future <span>AI/ML</span> Engineer
+                  </h1>
+                  <span className={styles.heroSubheading}>
+                    Doing MSc Artificial Intelligence and Robotics from Hertfordshire University, UK
+                  </span>
                 </div>
               </div>
             </div>
