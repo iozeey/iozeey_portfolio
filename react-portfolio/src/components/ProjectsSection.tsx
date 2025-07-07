@@ -307,12 +307,6 @@ const ProjectsSection: React.FC = () => {
                   >
                     View Demo
                   </button>
-                  <a
-                    href={project.githubLink}
-                    className="btn btn-secondary btn-sm"
-                  >
-                    View Code
-                  </a>
                 </div>
               </div>
             </div>
