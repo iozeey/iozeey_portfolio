@@ -29,8 +29,7 @@ const AboutSection: React.FC = () => {
           <div className="about-text animate-slideInLeft">
             <p>
               Passionate, determined, and self-motivated software engineer with 8 years of experience 
-              in web and desktop applications. I thrive on creating innovative solutions and staying 
-              ahead of technology trends.
+              in web and desktop applications. I thrive on creating innovative solutions and implement or use technology trends.
             </p>
             
             <h3>Technical Expertise:</h3>

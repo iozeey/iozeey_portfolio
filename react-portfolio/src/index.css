@@ -1441,6 +1441,8 @@ body:has(.lightbox-overlay) {
   .hero-buttons {
     flex-direction: column;
     align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
   }
   
   .footer-content {
