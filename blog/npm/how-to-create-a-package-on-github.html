@@ -1,0 +1,69 @@
+If your client wants to use **GitHub** as the package manager instead of **npmjs**, then you don't need to publish the package to npm's registry. Instead, you can use **GitHub as a package registry**, where you can publish the package as a GitHub **repository** and install it directly from GitHub.
+
+Here's what you need to do:
+
+### 1. **Publish the Package on GitHub:**
+
+* If the package isn't already on GitHub, you need to push the package to the GitHub repository.
+* Make sure that the repository has the necessary `package.json` file that defines the package name, version, dependencies, etc.
+
+### 2. **Configure the Repository:**
+
+* Ensure that the repository is **public** (or private with appropriate access controls) and has a **`package.json`** file, which will include metadata for the package.
+* If the package is **scoped** (like `@client/package-name`), make sure the scope is correctly configured in the `package.json` file.
+
+### 3. **Use GitHub as a Package Manager:**
+
+You can now install this package directly from the GitHub repository.
+
+* In the **`package.json`** of your project, specify the GitHub repository URL as the dependency:
+
+  ```json
+  "dependencies": {
+    "package-name": "github:username/repository#branch"
+  }
+  ```
+
+  Replace `username` with the GitHub username or organization name, `repository` with the repository name, and `branch` with the branch name (e.g., `main` or `master`).
+
+  Example:
+
+  ```json
+  "dependencies": {
+    "my-package": "github:client-name/my-package#main"
+  }
+  ```
+
+This will allow you to install the package directly from GitHub using npm or yarn.
+
+### 4. **Install the Package:**
+
+After adding the GitHub repository as a dependency, you can install the package by running:
+
+```bash
+npm install
+```
+
+or
+
+```bash
+yarn install
+```
+
+### 5. **Publish New Versions:**
+
+* Each time you want to update the package, you can simply update the package's version in `package.json` and push the changes to GitHub.
+* Make sure to tag the release (e.g., `v1.0.1`, `v1.1.0`) on GitHub, so others can easily reference that version.
+* GitHub will allow users to install any specific version by referencing the tag in the `package.json` (e.g., `github:client-name/my-package#v1.0.0`).
+
+### 6. **Private GitHub Repositories (Optional):**
+
+If the GitHub repository is private, you will need to authenticate with GitHub using a **personal access token**. You can store this token in your `npm` configuration:
+
+```bash
+npm config set //npm.pkg.github.com/:_authToken <your-personal-access-token>
+```
+
+### Conclusion:
+
+No, you don’t need npmjs if your client wants to use GitHub directly as the package manager. You can simply publish the package on GitHub and install it as a dependency using GitHub URLs in your `package.json`.

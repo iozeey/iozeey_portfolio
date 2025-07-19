@@ -1,0 +1,53 @@
+To check which account is being used to push to GitHub, follow these steps:
+
+1. **Check Git Global Configuration:**
+   Open your terminal and run the following command to see the global username and email configuration in Git:
+
+   ```bash
+   git config --global user.name
+   git config --global user.email
+   ```
+
+   This will display the global Git username and email that are set for commits.
+
+2. **Check Local Repository Configuration:**
+   If you want to check the Git username and email specific to a particular repository, navigate to that repository and run:
+
+   ```bash
+   git config user.name
+   git config user.email
+   ```
+
+   This will show the username and email configured for the current repository. If these values are not set, Git will use the global settings.
+
+3. **Check Git Remote URL:**
+   You can also check the remote URL to confirm which account you're pushing to, by running:
+
+   ```bash
+   git remote -v
+   ```
+
+   The URL displayed might contain the GitHub username (if you're using HTTPS) or be in the format `git@github.com:username/repository.git` (for SSH).
+
+4. **Check Authentication (for HTTPS):**
+   When pushing via HTTPS, Git will ask for your username and password (or personal access token) the first time. You can check your saved credentials in your Git credential manager:
+
+   * On macOS, check **Keychain Access**.
+   * On Windows, check **Credential Manager**.
+   * On Linux, it might be stored in `~/.git-credentials`.
+
+5. **Check SSH Keys (for SSH):**
+   If you're using SSH, check the SSH keys associated with your GitHub account. Run the following command to see which SSH key is being used:
+
+   ```bash
+   ssh -T git@github.com
+   ```
+
+   GitHub will respond with the username associated with the SSH key.
+
+This will help you identify which GitHub account is being used to push your changes.
+
+
+--global
+
+

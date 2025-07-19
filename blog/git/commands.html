@@ -1,0 +1,3 @@
+git ls-files | grep venv
+
+git ls-tree -r HEAD | grep venv || echo "No venv files found in Git tree"
