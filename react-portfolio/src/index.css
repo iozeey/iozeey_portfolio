@@ -399,6 +399,7 @@ p {
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
+  margin-top: 2rem;
 }
 
 /* Section Styles */
@@ -1401,6 +1402,14 @@ body:has(.lightbox-overlay) {
   }
 }
 
+/* Tablet specific adjustments */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .hero-buttons {
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .container {
@@ -1580,6 +1589,15 @@ body:has(.lightbox-overlay) {
   
   .social-links {
     justify-content: center;
+  }
+  
+  .hero-buttons {
+    margin-bottom: 3rem;
+  }
+  
+  .hero-buttons .btn {
+    min-width: 200px;
+    padding: 1rem 2rem;
   }
   
   .hire-title {
