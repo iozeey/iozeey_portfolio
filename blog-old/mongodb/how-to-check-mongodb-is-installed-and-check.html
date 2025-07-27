@@ -1,0 +1,74 @@
+To check whether **MongoDB is installed** on your **Mac**, follow these steps:
+
+---
+
+### ✅ Method 1: Check via Terminal
+
+1. **Open Terminal** (You can use Spotlight with `Cmd + Space`, then type “Terminal” and press Enter).
+
+2. **Run this command**:
+
+   ```bash
+   mongod --version
+   ```
+
+   or
+
+   ```bash
+   mongo --version
+   ```
+
+3. **Check the Output**:
+
+   * If MongoDB is installed, you'll see something like:
+
+     ```
+     db version v7.0.3
+     Build Info: ...
+     ```
+
+   * If it's **not installed**, you'll see an error like:
+
+     ```
+     zsh: command not found: mongod
+     ```
+
+---
+
+### ✅ Method 2: Check with `brew` (Homebrew Installation)
+
+If you used [Homebrew](https://brew.sh/) to install MongoDB, you can check it with:
+
+```bash
+brew list | grep mongo
+```
+
+If installed, it will list packages like:
+
+```
+mongodb-community
+mongodb-database-tools
+```
+
+If nothing appears, it’s likely not installed via Homebrew.
+
+---
+
+### 🛠 If Not Installed: Quick Installation with Homebrew
+
+To install MongoDB using Homebrew:
+
+```bash
+brew tap mongodb/brew
+brew install mongodb-community
+```
+
+After installation, you can start MongoDB with:
+
+```bash
+brew services start mongodb/brew/mongodb-community
+```
+
+---
+
+Let me know if you want help setting up MongoDB or configuring it for a project.

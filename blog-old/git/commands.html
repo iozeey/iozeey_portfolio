@@ -1,0 +1,32 @@
+git ls-files | grep venv
+
+git ls-tree -r HEAD | grep venv || echo "No venv files found in Git tree"
+
+find out is the file is being used in the project:
+find . -name "*.rb" -o -name "*.erb" -o -name "*.js" | xargs grep -l "session_timeout_old" 2>/dev/null || echo "No references found"
+
+
+dataFlatpickr
+
+
+lsof -ti:3000 | xargs kill -9 2>/dev/null || true
+
+Check if the current architecture is x86_64:
+and see on mac if it is running under Rosetta 2:
+arch -x86_64 uname -m
+
+Install Meteor on macOS with Rosetta 2:
+arch -x86_64 curl https://install.meteor.com/\?release\=1.10.2 | arch -x86_64 sh
+
+Check Meteor version on macOS with Rosetta 2:
+arch -x86_64 meteor --version
+
+Run Meteor on macOS with Rosetta 2:
+arch -x86_64 meteor
+
+
+Run Meteor with specific settings on macOS with Rosetta 2:
+arch -x86_64 meteor --settings .deploy/staging/settings.json
+
+Install Yarn on macOS with Rosetta 2:
+arch -x86_64 meteor npm install -g yarn

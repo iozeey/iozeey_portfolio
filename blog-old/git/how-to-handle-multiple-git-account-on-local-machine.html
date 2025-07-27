@@ -1,0 +1,86 @@
+
+To manage multiple Git accounts (e.g., GitHub and Bitbucket) on your local machine, you need to handle **SSH keys**, **Git configuration**, and optionally **SSH config file**. Here's a clear step-by-step setup:
+
+---
+
+### ✅ Step 1: Generate Separate SSH Keys
+
+```bash
+# GitHub key
+ssh-keygen -t rsa -b 4096 -C "your-email@github.com" -f ~/.ssh/id_rsa_github
+
+# Bitbucket key
+ssh-keygen -t rsa -b 4096 -C "your-email@bitbucket.org" -f ~/.ssh/id_rsa_bitbucket
+```
+
+---
+
+### ✅ Step 2: Add Keys to SSH Agent
+
+```bash
+eval "$(ssh-agent -s)"
+
+ssh-add ~/.ssh/id_rsa_github
+ssh-add ~/.ssh/id_rsa_bitbucket
+```
+
+---
+
+### ✅ Step 3: Configure SSH (`~/.ssh/config`)
+
+Create or edit the SSH config file:
+
+```bash
+nano ~/.ssh/config
+```
+
+Add:
+
+```ini
+# GitHub
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_rsa_github
+
+# Bitbucket
+Host bitbucket.org
+  HostName bitbucket.org
+  User git
+  IdentityFile ~/.ssh/id_rsa_bitbucket
+```
+
+---
+
+### ✅ Step 4: Add Public Keys to GitHub & Bitbucket
+
+* GitHub: Go to **Settings → SSH and GPG Keys → New SSH key**, and paste `~/.ssh/id_rsa_github.pub`.
+* Bitbucket: Go to **Personal Settings → SSH Keys → Add key**, and paste `~/.ssh/id_rsa_bitbucket.pub`.
+
+---
+
+### ✅ Step 5: Clone Repos Using SSH
+
+```bash
+# GitHub
+git clone git@github.com:username/repo.git
+
+# Bitbucket
+git clone git@bitbucket.org:username/repo.git
+```
+
+---
+
+### ✅ Optional: Per-Repo Git Identity
+
+If you want to use different usernames/emails per repo:
+
+```bash
+cd repo-folder
+git config user.name "Your Name"
+git config user.email "your-email@domain.com"
+```
+
+---
+
+Let me know if you're using HTTPS instead of SSH or want to simplify using credential managers.
