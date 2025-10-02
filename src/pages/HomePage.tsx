@@ -19,7 +19,7 @@ const HomePage: React.FC = () => {
         <SkillsSection />
         <ServicesSection />
         <ProjectsSection />
-        <CounterSection />
+        {/* <CounterSection /> */}
         <HireMeSection />
       </main>
       <FooterSection />
