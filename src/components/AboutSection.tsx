@@ -21,30 +21,29 @@ const AboutSection: React.FC = () => {
         <div className="section-header">
           <h2 className="section-title">About Me</h2>
           <p className="section-subtitle">
-            "Change is life." - That's why I always welcome change and growth.
+            "Change is life." - I build with that mindset, combining product thinking, AI, and engineering discipline.
           </p>
         </div>
 
         <div className="about-content">
           <div className="about-text animate-slideInLeft">
             <p>
-              Passionate, determined, and self-motivated software engineer with 8 years of experience 
-              in web and desktop applications. I thrive on creating innovative solutions and implement or use technology trends.
+              I’m a software engineer focused on AI-driven products, automation, and full-stack delivery. I help teams shape ideas into practical solutions that are usable, maintainable, and ready for real users.
             </p>
             
             <h3>Technical Expertise:</h3>
             <div className="tech-skills">
               <div className="skill-category">
-                <h4>Backend Development</h4>
-                <p>Python Django, Ruby on Rails, Core PHP, Laravel, Node.js</p>
+                <h4>AI Product Development</h4>
+                <p>LLM integrations, AI assistants, workflow automation, product design</p>
               </div>
               <div className="skill-category">
-                <h4>Frontend Development</h4>
-                <p>React.js, GraphQL, Apollo Client, Angular.js, Vue.js, HTML5, CSS3, Bootstrap</p>
+                <h4>Full-Stack Engineering</h4>
+                <p>React.js, Node.js, Django, Ruby on Rails, APIs, scalable delivery</p>
               </div>
               <div className="skill-category">
-                <h4>Emerging Technologies</h4>
-                <p>React Native, Java Dropwizard, Maven, Android Development</p>
+                <h4>Delivery & Automation</h4>
+                <p>Cloud deployment, CI/CD, analytics, observability, process improvement</p>
               </div>
             </div>
 

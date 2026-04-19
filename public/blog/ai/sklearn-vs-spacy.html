@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Embedded Document</title>
+    <link rel="stylesheet" href="./../../theme/blog-template.css" />
+  </head>
+  <body>
+    <button class="toggle-button" onclick="toggleDarkMode()">
+      Toggle Dark Mode
+    </button>
+    <div class="container">
+      <h1>Scikit-learn vs spaCy: When to Use Which?</h1>
+      <p>
+        Understanding the differences between
+        <strong>Scikit-learn (sklearn)</strong> and <strong>spaCy</strong> is
+        essential for data scientists and NLP engineers. These two libraries
+        serve very different purposes in the machine learning and text
+        processing pipelines, yet they're often used together. Choosing the
+        right tool for the job can significantly impact development speed, model
+        performance, and maintainability.
+      </p>
+
+      <h2>🧠 Comparing Scikit-learn and spaCy</h2>
+      <p>Here’s a practical breakdown of how these two libraries stack up:</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Scikit-learn (sklearn)</th>
+            <th>spaCy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Purpose</td>
+            <td>General-purpose machine learning library</td>
+            <td>Specifically built for Natural Language Processing (NLP)</td>
+          </tr>
+          <tr>
+            <td>Typical Use Cases</td>
+            <td>
+              Classification, regression, clustering, model training on
+              numerical/tabular data
+            </td>
+            <td>
+              Tokenization, POS tagging, NER, dependency parsing, text
+              processing
+            </td>
+          </tr>
+          <tr>
+            <td>Type of Data</td>
+            <td>
+              Works mainly with <strong>numerical vectors</strong> (e.g. TF-IDF,
+              features)
+            </td>
+            <td>
+              Works directly with <strong>raw text</strong> and linguistic
+              features
+            </td>
+          </tr>
+          <tr>
+            <td>ML Algorithms</td>
+            <td>
+              Provides ML algorithms (SVM, Random Forest, Logistic Regression,
+              etc.)
+            </td>
+            <td>
+              Does not focus on ML algorithms — more on
+              <strong>pretrained NLP pipelines</strong>
+            </td>
+          </tr>
+          <tr>
+            <td>Deep Learning Support</td>
+            <td>Limited to classic ML</td>
+            <td>
+              Built-in support for neural networks via <strong>Thinc</strong>,
+              integrates with <strong>PyTorch, Transformers</strong>
+            </td>
+          </tr>
+          <tr>
+            <td>Speed & Optimization</td>
+            <td>Optimized for numerical computation</td>
+            <td>Extremely fast for text processing using Cython</td>
+          </tr>
+          <tr>
+            <td>Pre-trained Models</td>
+            <td>No (you need to train your own models)</td>
+            <td>
+              Yes (NER, POS tagging, dependency parsing, sentence segmentation)
+            </td>
+          </tr>
+          <tr>
+            <td>Use for NLP?</td>
+            <td>
+              Yes, but requires manual feature extraction (Bag of Words, TF-IDF,
+              embeddings)
+            </td>
+            <td>Yes, directly handles text efficiently with built-in models</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>✅ When to Use Which?</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Use Case</th>
+            <th>Best Choice</th>
+            <th>Why?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Text preprocessing (tokenize, lemmatize, NER)</td>
+            <td><strong>spaCy</strong></td>
+            <td>Built-in, faster, accurate</td>
+          </tr>
+          <tr>
+            <td>Classical ML on text (spam detection, sentiment analysis)</td>
+            <td><strong>sklearn</strong></td>
+            <td>Build custom models using TF-IDF, SVM, etc.</td>
+          </tr>
+          <tr>
+            <td>Build NER or POS from scratch</td>
+            <td><strong>spaCy</strong></td>
+            <td>Designed for NLP tasks</td>
+          </tr>
+          <tr>
+            <td>Train ML model on tabular or numeric data</td>
+            <td><strong>sklearn</strong></td>
+            <td>Not an NLP tool</td>
+          </tr>
+          <tr>
+            <td>Combine deep learning + NLP</td>
+            <td>spaCy + Transformers or sklearn + embeddings</td>
+            <td>Combining strengths from both libraries</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>🎯 Example: Using Both Together</h2>
+      <pre><code class="language-python">from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+import spacy
+
+# spaCy for tokenization
+nlp = spacy.load("en_core_web_sm")
+texts = ["I love AI.", "This is terrible."]
+
+processed = [" ".join([token.lemma_ for token in nlp(text)]) for text in texts]
+
+# sklearn for ML model
+vectorizer = TfidfVectorizer()
+X = vectorizer.fit_transform(processed)
+
+model = LogisticRegression().fit(X, [1, 0])
+</code></pre>
+
+      <div class="conclusion">
+        <h2>Conclusion</h2>
+        <p>
+          <strong>Use spaCy</strong> when working with
+          <strong>text understanding and NLP pipelines</strong>.
+        </p>
+        <p>
+          <strong>Use sklearn</strong> when you want to build
+          <strong>machine learning models</strong>, including text
+          classification with manual preprocessing.
+        </p>
+        <p>
+          Each library shines in its domain. Together, they form a powerful
+          stack for end-to-end NLP and ML tasks.
+        </p>
+      </div>
+    </div>
+    <script src="./../theme/blog-template.js"></script>
+  </body>
+</html>

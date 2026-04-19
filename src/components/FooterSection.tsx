@@ -36,10 +36,10 @@ const FooterSection: React.FC = () => {
             <div className="footer-section">
               <h4>Services</h4>
               <ul>
-                <li><a href="#services">Web Development</a></li>
-                <li><a href="#services">Mobile Apps</a></li>
+                <li><a href="#services">AI Product Strategy</a></li>
+                <li><a href="#services">Automation Systems</a></li>
                 <li><a href="#services">AI/ML Solutions</a></li>
-                <li><a href="#services">Consulting</a></li>
+                <li><a href="#services">Architecture Consulting</a></li>
               </ul>
             </div>
             
@@ -65,7 +65,7 @@ const FooterSection: React.FC = () => {
         
         <div className="footer-bottom">
           <p className="footer-text">
-            © {currentYear} Zeeshan Ahmad. Made with ❤️ for innovation.
+            © {currentYear} Zeeshan Ahmad. Built for intelligent products and modern teams.
           </p>
         </div>
       </div>

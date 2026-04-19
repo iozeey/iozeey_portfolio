@@ -3,40 +3,40 @@ import React from 'react';
 const ServicesSection: React.FC = () => {
   const services = [
     {
-      icon: '💻',
-      title: 'Web Applications',
-      description: 'Modern SaaS applications with scalable architecture and cutting-edge technologies.',
-      features: ['React/Vue.js', 'Cloud-Native', 'Responsive Design']
+      icon: '🤖',
+      title: 'AI Product Strategy',
+      description: 'Translate business goals into practical AI use cases, delivery plans, and product roadmaps.',
+      features: ['Use-case Discovery', 'Roadmapping', 'Value Mapping']
     },
     {
-      icon: '🚀',
-      title: 'Full-Stack Development',
-      description: 'End-to-end development with latest industry trends and best practices.',
-      features: ['Frontend + Backend', 'API Development', 'Database Design']
+      icon: '⚡',
+      title: 'Automation Systems',
+      description: 'Replace repetitive manual work with smart workflows, integrations, and reliable automations.',
+      features: ['Workflow Design', 'Integrations', 'Process Optimization']
     },
     {
-      icon: '🎨',
-      title: 'UI/UX Design',
-      description: 'Simple, intuitive, elegant, and responsive web experiences.',
-      features: ['Modern Design', 'User-Centered', 'Mobile-First']
+      icon: '🧠',
+      title: 'AI Assistants',
+      description: 'Build conversational assistants for support, sales, operations, and internal knowledge access.',
+      features: ['Chat UX', 'Context Retrieval', 'Prompt Design']
     },
     {
-      icon: '⚙️',
-      title: 'DevOps & Deployment',
-      description: 'CI/CD integration and cloud deployment for seamless development workflow.',
-      features: ['Automation', 'Cloud Hosting', 'Performance Optimization']
+      icon: '🛰️',
+      title: 'MVP Delivery',
+      description: 'Ship polished prototypes and production-ready products with a fast, iterative build process.',
+      features: ['Rapid Prototyping', 'Web Apps', 'Iterative Delivery']
     },
     {
-      icon: '🔍',
-      title: 'SEO & Analytics',
-      description: 'Boost your organic presence and track performance with data-driven insights.',
-      features: ['SEO Optimization', 'Analytics Setup', 'Performance Monitoring']
+      icon: '📊',
+      title: 'Data Intelligence',
+      description: 'Turn operational data into clear dashboards, signals, and decision support for your team.',
+      features: ['Dashboards', 'Reporting', 'Decision Support']
     },
     {
       icon: '🏗️',
-      title: 'System Architecture',
-      description: 'Scalable system design and architecture consulting for complex projects.',
-      features: ['Microservices', 'API Design', 'Database Architecture']
+      title: 'Architecture & Scale',
+      description: 'Design the backend, APIs, and deployment foundation needed for products that can grow.',
+      features: ['APIs', 'Cloud Architecture', 'Reliable Scaling']
     }
   ];
 
@@ -44,9 +44,9 @@ const ServicesSection: React.FC = () => {
     <section id="services" className="services-section section">
       <div className="container">
         <div className="section-header">
-          <h2 className="section-title">My Services</h2>
+          <h2 className="section-title">AI Solutions</h2>
           <p className="section-subtitle">
-            Your success is my success! Let's build something amazing together.
+            Practical systems for teams that want to ship AI value, automate work, and launch stronger digital products.
           </p>
         </div>
 
